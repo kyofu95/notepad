@@ -1,6 +1,7 @@
 """This module provides text model for content management within the application."""
 
 from datetime import datetime
+from typing import Optional
 
 from sqlalchemy import func
 from sqlalchemy.orm import mapped_column, Mapped, relationship
@@ -17,7 +18,7 @@ class Text(BaseModel):
     content: Mapped[str]
     title: Mapped[str]
     created_at: Mapped[datetime] = mapped_column(default=func.now())
-    last_update_date: Mapped[datetime]
+    last_update_date: Mapped[Optional[datetime]]
     deleted: Mapped[bool] = mapped_column(default=False)
 
     texttags: Mapped[list["TextTag"]] = relationship(back_populates="text", lazy="selectin")
