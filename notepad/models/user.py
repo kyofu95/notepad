@@ -4,7 +4,7 @@ from datetime import datetime
 from typing import Optional
 
 from sqlalchemy import func
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from .base import BaseModel, int_primarykey
 
@@ -22,3 +22,5 @@ class User(BaseModel):
     last_login_date: Mapped[Optional[datetime]]
     last_update_date: Mapped[Optional[datetime]]
     active: Mapped[bool] = mapped_column(default=True)
+
+    texts: Mapped[list["Text"]] = relationship(back_populates="user", lazy="selectin")
