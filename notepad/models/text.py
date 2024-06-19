@@ -4,9 +4,11 @@ from datetime import datetime
 from typing import Optional
 
 from sqlalchemy import ForeignKey, func
+from sqlalchemy.ext.associationproxy import association_proxy, AssociationProxy
 from sqlalchemy.orm import mapped_column, Mapped, relationship
 
 from .base import BaseModel, int_primarykey
+from .tag import TextTag
 
 
 class Text(BaseModel):
@@ -24,4 +26,8 @@ class Text(BaseModel):
 
     user: Mapped["User"] = relationship(back_populates="texts", lazy="selectin")
 
-    texttags: Mapped[list["TextTag"]] = relationship(back_populates="text", lazy="selectin")
+    text_tag_associations: Mapped[list["TextTag"]] = relationship(back_populates="text", lazy="selectin")
+
+    tags: AssociationProxy[list["Tag"]] = association_proxy(
+        "text_tag_associations", "tag", creator=lambda tag_obj: TextTag(tag=tag_obj)
+    )
