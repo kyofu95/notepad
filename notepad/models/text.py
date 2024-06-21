@@ -4,8 +4,8 @@ from datetime import datetime
 from typing import Optional
 
 from sqlalchemy import ForeignKey, func
-from sqlalchemy.ext.associationproxy import association_proxy, AssociationProxy
-from sqlalchemy.orm import mapped_column, Mapped, relationship
+from sqlalchemy.ext.associationproxy import AssociationProxy, association_proxy
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from .base import BaseModel, int_primarykey
 from .tag import TextTag

@@ -1,8 +1,7 @@
 """Base module for database models."""
 
-from typing_extensions import Annotated
-
 from sqlalchemy.orm import DeclarativeBase, mapped_column
+from typing_extensions import Annotated
 
 
 class BaseModel(DeclarativeBase):
