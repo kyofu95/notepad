@@ -11,3 +11,12 @@ web_router = APIRouter()
 async def index(request: Request):
     page_context = {"user_logged": False}
     return templates.TemplateResponse(request=request, name="index.html", context=page_context)
+
+
+@web_router.get("/login", response_class=HTMLResponse)
+async def login(request: Request):
+    return templates.TemplateResponse(request=request, name="login.html")
+
+@web_router.get("/signup", response_class=HTMLResponse)
+async def signup(request: Request):
+    return templates.TemplateResponse(request=request, name="signup.html")
