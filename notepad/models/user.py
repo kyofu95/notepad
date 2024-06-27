@@ -22,5 +22,6 @@ class User(BaseModel):
     last_login_date: Mapped[Optional[datetime]]
     last_update_date: Mapped[Optional[datetime]]
     active: Mapped[bool] = mapped_column(default=True)
+    is_admin: Mapped[bool] = mapped_column(default=False)
 
     texts: Mapped[list["Text"]] = relationship(back_populates="user", lazy="selectin")

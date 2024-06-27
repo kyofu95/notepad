@@ -1,7 +1,7 @@
 from typing import AsyncGenerator
 
 from sqlalchemy import URL
-from sqlalchemy.ext.asyncio import async_sessionmaker, AsyncSession, create_async_engine
+from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
 from notepad.core.config import settings
 
