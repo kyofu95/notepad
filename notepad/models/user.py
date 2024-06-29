@@ -1,12 +1,17 @@
 """This module defines the user model, encompassing user details and activity tracking."""
 
 from datetime import datetime
-from typing import Optional
+from typing import TYPE_CHECKING, Optional
 
 from sqlalchemy import func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from .base import BaseModel, int_primarykey
+from .text import Text
+
+# Pylint: func.now is not callable
+if TYPE_CHECKING:
+    func: callable
 
 
 class User(BaseModel):
@@ -24,4 +29,6 @@ class User(BaseModel):
     active: Mapped[bool] = mapped_column(default=True)
     is_admin: Mapped[bool] = mapped_column(default=False)
 
-    texts: Mapped[list["Text"]] = relationship(back_populates="user", lazy="selectin")
+    texts: Mapped[list[Text]] = relationship(
+        back_populates="user", lazy="selectin"
+    )
