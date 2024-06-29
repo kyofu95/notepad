@@ -1,6 +1,6 @@
 """This module defines a Pydantic schema for a Tag scheme."""
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 
 class TagBase(BaseModel):
@@ -12,10 +12,7 @@ class TagBase(BaseModel):
 class Tag(TagBase):
     """Pydantic schema for a tag entity."""
 
-    class Config:
-        """Configuration settings for the Tag schema when used with ORMs."""
-
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 TagDB = Tag

@@ -2,7 +2,7 @@
 
 from datetime import datetime
 
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, ConfigDict, EmailStr
 
 from .text import Text, TextDB
 
@@ -31,14 +31,11 @@ class User(UserBase):
 class UserDB(User):
     """A pydantic schema tailored for database interactions."""
 
+    model_config = ConfigDict(from_attributes=True)
+
     id: int
     last_login_date: datetime
     last_update_date: datetime
     active: bool
 
     texts: list[TextDB]
-
-    class Config:
-        """Configuration settings for the UserDB schema when used with ORMs."""
-
-        orm_mode = True

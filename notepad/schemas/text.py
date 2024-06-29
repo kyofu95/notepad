@@ -2,7 +2,7 @@
 
 from datetime import datetime
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 from .tag import Tag
 
@@ -26,6 +26,8 @@ class Text(TextBase):
 class TextDB(TextBase):
     """A pydantic schema tailored for database interactions."""
 
+    model_config = ConfigDict(from_attributes=True)
+
     id: int
     created_at: datetime
     last_update_date: datetime | None
@@ -33,8 +35,3 @@ class TextDB(TextBase):
 
     user: "User"
     tags: list[Tag] = []
-
-    class Config:
-        """Configuration settings for the TextDB schema when used with ORMs."""
-
-        orm_mode = True
