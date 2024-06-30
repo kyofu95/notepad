@@ -38,4 +38,4 @@ class TextRepository(BaseRepository):
             .order_by(TextModel.last_update_date.desc())
             .limit(count)
         )
-        return results.scalars().all()
+        return list(results.scalars().all())
