@@ -30,7 +30,7 @@ class UserService:
         """
 
         user = await self.repository.create(name, email, password)
-        return user
+        return UserDBScheme.model_validate(user, from_attributes=True)
 
     @staticmethod
     def get_service(

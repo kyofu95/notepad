@@ -34,7 +34,7 @@ class TextService:
         # shut up, mypy
         user_model = UserModel(**user.model_dump())
         text = await self.repository.create(user_model, content, title)
-        return text
+        return TextDBSchema.model_validate(text, from_attributes=True)
 
     @staticmethod
     def get_service(

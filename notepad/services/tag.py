@@ -14,6 +14,7 @@ from notepad.repositories.tag import TagRepository
 from notepad.schemas.tag import Tag as TagScheme
 from notepad.schemas.text import Text as TextScheme
 
+from notepad.models.text import Text as TextModel
 
 class TagService:
     """
@@ -28,8 +29,9 @@ class TagService:
         Creates a new tag associated with a given text entry and returns the tag object.
         """
 
-        tag = await self.repository.create(text, name)
-        return tag
+        text_model = TextModel(**text.model_dump())
+        tag = await self.repository.create(text_model, name)
+        return TagScheme.model_validate(tag, from_attributes=True)
 
     @staticmethod
     def get_service(
