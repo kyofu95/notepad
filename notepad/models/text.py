@@ -1,7 +1,7 @@
 """This module provides text model for content management within the application."""
 
 from datetime import datetime
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Callable
 
 from sqlalchemy import ForeignKey, func
 from sqlalchemy.ext.associationproxy import AssociationProxy, association_proxy
@@ -12,7 +12,7 @@ from .tag import TextTag
 
 # Pylint: func.now is not callable
 if TYPE_CHECKING:
-    func: callable
+    func: Callable
     from .tag import Tag
     from .user import User
 
