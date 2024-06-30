@@ -1,7 +1,7 @@
 """This module defines the user model, encompassing user details and activity tracking."""
 
 from datetime import datetime
-from typing import TYPE_CHECKING, Optional
+from typing import TYPE_CHECKING, Callable, Optional
 
 from sqlalchemy import func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
@@ -11,7 +11,7 @@ from .text import Text
 
 # Pylint: func.now is not callable
 if TYPE_CHECKING:
-    func: callable
+    func: Callable
 
 
 class User(BaseModel):
@@ -20,8 +20,8 @@ class User(BaseModel):
     __tablename__ = "user_account"
 
     id: Mapped[int_primarykey]
-    name: Mapped[str]
-    email: Mapped[str]
+    name: Mapped[str] = mapped_column(unique=True)
+    email: Mapped[str] = mapped_column(unique=True)
     password: Mapped[str]
     created_at: Mapped[datetime] = mapped_column(default=func.now())
     last_login_date: Mapped[Optional[datetime]]
